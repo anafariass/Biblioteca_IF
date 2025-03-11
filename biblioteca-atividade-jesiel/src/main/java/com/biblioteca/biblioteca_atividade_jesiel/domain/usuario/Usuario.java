@@ -8,11 +8,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity //representa uma tabela no banco de dados.
 
 public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Id //chave primária da tabela
+    @GeneratedValue(strategy = GenerationType.UUID) // define como será gerdado e gerar automaticamente como \ uuid - identificador único universal)
     private UUID id;
 
     @Column(nullable = false)
