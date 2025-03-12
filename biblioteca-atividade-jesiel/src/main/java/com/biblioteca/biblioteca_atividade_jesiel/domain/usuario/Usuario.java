@@ -1,7 +1,6 @@
 package com.biblioteca.biblioteca_atividade_jesiel.domain.usuario;
 
 import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +14,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.UUID) // define como será gerdado e gerar automaticamente como \ uuid - identificador único universal)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false)// aqui gera as colunas da tabela
     private String nome;
 
     @Column(nullable = false, unique = true)
@@ -48,16 +47,17 @@ public class Usuario {
     }
 
 
-    //construtir vazio e um todos os argumentos
+    //construtir vazio e um com todos os argumentos
     public Usuario() {
     }
-
+    //construtor com todos os argumentos
     public Usuario(UUID id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
     }
     
+    //construtor com um argumento de UsuarioDto
     public Usuario(UsuarioDto usuarioDto){
         this.nome = usuarioDto.nome();
         this.email = usuarioDto.email();
