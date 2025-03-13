@@ -21,10 +21,10 @@ import com.biblioteca.biblioteca_atividade_jesiel.domain.usuario.UsuarioReposito
 
 import jakarta.validation.Valid;
 
-@RestController
-@RequestMapping("/usuario")
+@RestController // lidar com requisições HTTP e devolver respostas JSON.
+@RequestMapping("/usuario") //Define o caminho base 
 public class UsuarioController {
-    @Autowired
+    @Autowired //injeta automaticamente uma instância do UsuarioRepository.
     private UsuarioRepository UsuarioRepository;
 
     //criação de usuarios
