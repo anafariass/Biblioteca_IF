@@ -50,6 +50,7 @@ public class Usuario {
     //construtir vazio e um com todos os argumentos
     public Usuario() {
     }
+    
     //construtor com todos os argumentos
     public Usuario(UUID id, String nome, String email) {
         this.id = id;
