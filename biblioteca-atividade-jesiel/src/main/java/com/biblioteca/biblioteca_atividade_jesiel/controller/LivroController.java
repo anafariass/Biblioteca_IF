@@ -2,14 +2,15 @@ package com.biblioteca.biblioteca_atividade_jesiel.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.biblioteca.biblioteca_atividade_jesiel.domain.livro.Livro;
+import com.biblioteca.biblioteca_atividade_jesiel.domain.livro.LivroDto;
+import com.biblioteca.biblioteca_atividade_jesiel.domain.livro.LivroRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import com.biblioteca.biblioteca_atividade_jesiel.domain.usuario.livro.Livro;
-import com.biblioteca.biblioteca_atividade_jesiel.domain.usuario.livro.LivroDto;
-import com.biblioteca.biblioteca_atividade_jesiel.domain.usuario.livro.LivroRepository;
 
 import jakarta.validation.Valid;
 

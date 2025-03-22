@@ -1,9 +1,9 @@
-package com.biblioteca.biblioteca_atividade_jesiel.domain.usuario.livro.empretismo;
+package com.biblioteca.biblioteca_atividade_jesiel.domain.empretismo;
 
 import java.time.LocalDate;
 
+import com.biblioteca.biblioteca_atividade_jesiel.domain.livro.Livro;
 import com.biblioteca.biblioteca_atividade_jesiel.domain.usuario.Usuario;
-import com.biblioteca.biblioteca_atividade_jesiel.domain.usuario.livro.Livro;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
