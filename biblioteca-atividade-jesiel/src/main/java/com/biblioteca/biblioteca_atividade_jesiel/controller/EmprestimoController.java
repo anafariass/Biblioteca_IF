@@ -75,4 +75,15 @@ public class EmprestimoController {
         return ResponseEntity.ok(emprestimos);
     }
 
+    //buscar emprestimo por id
+    @GetMapping("/{id}")
+    public ResponseEntity<Emprestimo> buscarPorId(@PathVariable Long id) {
+        Emprestimo emprestimo = emprestimoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Empréstimo não encontrado"));
+        return ResponseEntity.ok(emprestimo);
+    }
+    
+
+
+
 }
