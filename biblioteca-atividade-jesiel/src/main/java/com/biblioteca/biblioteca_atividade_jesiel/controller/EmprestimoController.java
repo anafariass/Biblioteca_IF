@@ -82,8 +82,24 @@ public class EmprestimoController {
             .orElseThrow(() -> new RuntimeException("Empréstimo não encontrado"));
         return ResponseEntity.ok(emprestimo);
     }
-    
 
+    //atualizar emprestimo
+    @PutMapping("/{id}")
+    public ResponseEntity<Emprestimo> atualizarEmprestimo(
+            @PathVariable Long id,
+            @RequestBody @Valid EmprestimoDto emprestimoDto) {
+        
+        Emprestimo emprestimo = emprestimoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Empréstimo não encontrado"));
+
+        // Atualiza apenas os campos permitidos
+        if (emprestimoDto.dataDevolucao() != null) {
+            emprestimo.setDataDevolucao(emprestimoDto.dataDevolucao());
+        }
+
+        Emprestimo updatedEmprestimo = emprestimoRepository.save(emprestimo);
+        return ResponseEntity.ok(updatedEmprestimo);
+    }
 
 
 }
