@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import jakarta.validation.constraints.NotNull;
 
-public record EmprestimoDto(@NotNull Long id, @NotNull Long livroId, @NotNull UUID usuarioId, @NotNull LocalDate dataEmprestimo, LocalDate dataDevolucao) {
+public record EmprestimoDto(Long id, @NotNull Long isbn, @NotNull UUID usuarioId, @NotNull LocalDate dataEmprestimo, LocalDate dataDevolucao) {
     
     
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +51,7 @@ public class EmprestimoController {
     @PostMapping
     public ResponseEntity<Emprestimo> criarEmprestimo(@RequestBody @Valid EmprestimoDto emprestimoDto) {
         // Busca o livro e o usuário pelos IDs
-        Livro livro = livroRepository.findById(emprestimoDto.livroId())
+        Livro livro = livroRepository.findById(emprestimoDto.isbn())
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
         Usuario usuario = usuarioRepository.findById(emprestimoDto.usuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
@@ -67,29 +68,29 @@ public class EmprestimoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmprestimo);
     }
 
-    //listar emprestimos
+    // listar emprestimos
     @GetMapping
     public ResponseEntity<List<Emprestimo>> listarTodosEmprestimos() {
         List<Emprestimo> emprestimos = emprestimoRepository.findAll();
         return ResponseEntity.ok(emprestimos);
     }
 
-    //buscar emprestimo por id
+    // buscar emprestimo por id
     @GetMapping("/{id}")
     public ResponseEntity<Emprestimo> buscarPorId(@PathVariable Long id) {
         Emprestimo emprestimo = emprestimoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Empréstimo não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Empréstimo não encontrado"));
         return ResponseEntity.ok(emprestimo);
     }
 
-    //atualizar emprestimo
+    // atualizar emprestimo
     @PutMapping("/{id}")
     public ResponseEntity<Emprestimo> atualizarEmprestimo(
             @PathVariable Long id,
             @RequestBody @Valid EmprestimoDto emprestimoDto) {
-        
+
         Emprestimo emprestimo = emprestimoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Empréstimo não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Empréstimo não encontrado"));
 
         // Atualiza apenas os campos permitidos
         if (emprestimoDto.dataDevolucao() != null) {
@@ -100,6 +101,10 @@ public class EmprestimoController {
         return ResponseEntity.ok(updatedEmprestimo);
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarEmprestimo(@PathVariable Long id) {
+        emprestimoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
