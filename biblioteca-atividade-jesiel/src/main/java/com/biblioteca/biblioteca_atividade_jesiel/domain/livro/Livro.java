@@ -106,7 +106,7 @@ public class Livro {
     }
 
     public void setQuantidade(int quantidade) {
-        this.anoPublicacao = quantidade;
+        this.quantidade = quantidade;
     }
 
     public int getQuantidade() {

@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 @RequestMapping("/livros")
 public class LivroController {
 
-    private final LivroRepository livroRepository;
-
     @Autowired
+    private LivroRepository livroRepository;
+
     public LivroController(LivroRepository livroRepository) {
         this.livroRepository = livroRepository;
     }
@@ -61,7 +61,7 @@ public class LivroController {
 
     //atualizar livros
     @PutMapping("/{isbn}")
-    public ResponseEntity<?> atualizarLivro(@PathVariable Long isbn, @RequestBody LivroDto dados) {
+    public ResponseEntity<?> atualizarLivro(@PathVariable Long isbn,@Valid @RequestBody LivroDto dados) {
         
         Livro livro = this.livroRepository.findById(isbn).orElse(null);
         if(livro == null){
@@ -74,11 +74,16 @@ public class LivroController {
         livro.setEditora(dados.editora());
         livro.setQuantidade(dados.quantidade());
 
+        if(dados.disponivel() != null) {
+            livro.setDisponivel(dados.disponivel());
+        }
+
         this.livroRepository.save(livro);
         return ResponseEntity.ok(livro);
 
     }
 
+    //delete livros
     @DeleteMapping("/{isbn}")
     public ResponseEntity<?> deletarLivro(@PathVariable Long isbn) {
         Livro livro = this.livroRepository.findById(isbn).orElse(null);
@@ -86,7 +91,7 @@ public class LivroController {
             return ResponseEntity.notFound().build();
         }
         this.livroRepository.delete(livro);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Livro " +livro.getTitulo() + " deletado com sucesso");
 
     }
 
