@@ -11,6 +11,7 @@ import com.biblioteca.biblioteca_atividade_jesiel.domain.livro.Livro;
 import com.biblioteca.biblioteca_atividade_jesiel.domain.livro.LivroRepository;
 import com.biblioteca.biblioteca_atividade_jesiel.domain.usuario.Usuario;
 import com.biblioteca.biblioteca_atividade_jesiel.domain.usuario.UsuarioRepository;
+import com.biblioteca.biblioteca_atividade_jesiel.service.EmailService;
 
 import jakarta.validation.Valid;
 
@@ -37,15 +38,19 @@ public class EmprestimoController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     public EmprestimoController() {
 
     }
 
     public EmprestimoController(EmprestimoRepository emprestimoRepository, LivroRepository livroRepository,
-            UsuarioRepository usuarioRepository) {
+            UsuarioRepository usuarioRepository, EmailService emailService) {
         this.emprestimoRepository = emprestimoRepository;
         this.livroRepository = livroRepository;
         this.usuarioRepository = usuarioRepository;
+        this.emailService = emailService;
     }
 
     @PostMapping
@@ -58,10 +63,31 @@ public class EmprestimoController {
 
         // Cria o empréstimo
         Emprestimo emprestimo = new Emprestimo();
-        emprestimo.setLivro(livro); // Usando setLivro
-        emprestimo.setUsuario(usuario); // Usando setUsuario
+        emprestimo.setLivro(livro); // Associa o livro ao empréstimo
+        emprestimo.setUsuario(usuario);
         emprestimo.setDataEmprestimo(emprestimoDto.dataEmprestimo());
         emprestimo.setDataDevolucao(emprestimoDto.dataDevolucao());
+
+        if (usuario.getEmail() == null || usuario.getEmail().isBlank()) { // Verifica se o usuário possui e-mail cadastrado
+            throw new RuntimeException("Usuário não possui e-mail cadastrado!");
+        }
+
+        emailService.enviarLembreteDevolucao( // Envia o e-mail de lembrete de devolução
+            usuario.getEmail(),
+            livro.getTitulo(),
+            emprestimo.getDataDevolucao() // Envia a data de devolução
+        );
+        try {
+            emailService.enviarLembreteDevolucao(
+                usuario.getEmail(),
+                livro.getTitulo(),
+                emprestimo.getDataDevolucao()
+            );
+        } catch (Exception ex) {
+            System.err.println("Erro ao enviar e-mail: " + ex.getMessage());
+            // Não interrompe o fluxo, apenas registra o erro.
+        }
+
 
         // Salva o empréstimo no banco de dados
         Emprestimo savedEmprestimo = emprestimoRepository.save(emprestimo);
