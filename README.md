@@ -30,6 +30,7 @@ Aplicação Web com Spring Boot
 
 ## Estrutura do Projeto
 
+```bash
 biblioteca/
 ├── src/
 │   ├── main/
