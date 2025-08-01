@@ -36,10 +36,10 @@ biblioteca/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com.exemplo.biblioteca/
-│   │   │       ├── controllers/     # Lógica de controle
-│   │   │       ├── models/          # Classes de domínio (Livro, Usuario, etc.)
-│   │   │       ├── daos/            # Acesso aos dados
-│   │   │       └── App.java         # Menu principal
+│   │   │       ├── controllers/     
+│   │   │       ├── models/         
+│   │   │       ├── daos/        
+│   │   │       └── App.java     
 │   │   └── resources/
 │   │       └── application.properties
 ├── pom.xml
@@ -61,21 +61,4 @@ biblioteca/
 - 
 ---
 
-## Como Rodar o Projeto
-
-1. Clone o projeto:
-
-
-git clone https://github.com/anafariass/sistema-biblioteca.git
-cd sistema-biblioteca
-
-
-2. Configure o banco de dados em application.properties:
-
-spring.datasource.url=jdbc:postgresql://localhost:5432/biblioteca
-spring.datasource.username=seu_usuario
-spring.datasource.password=sua_senha
-
-3. Rode o projeto:
-
-mvn spring-boot:run
+ Se curtir, deixa uma estrela no repo! Me ajuda demais! ⭐
