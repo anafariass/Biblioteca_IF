@@ -1,2 +1,80 @@
-# biblioteca-atividade-jesiel
+# Sistema de Biblioteca 
 Aplicação Web com Spring Boot
+
+> Um sistema simples e funcional para gerenciar livros, usuários e empréstimos de forma organizada. 
+---
+
+##  Funcionalidades
+- Cadastro de livros, usuários e pedidos de empréstimo
+
+- Controle de devoluções e status de empréstimos
+
+- Busca por livros e usuários cadastrados
+
+- Relatórios básicos de livros disponíveis e emprestados
+
+- Menu interativo no console (CLI) ou rotas REST (se configuradas)
+  
+---
+
+##  Tecnologias Utilizadas
+
+- **Java**
+- **Spring Boot**
+- **PostgreSQL**
+- **Maven**
+- **JDBC**
+- **VS Code**
+
+---
+
+## Estrutura do Projeto
+
+biblioteca/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com.exemplo.biblioteca/
+│   │   │       ├── controllers/     # Lógica de controle
+│   │   │       ├── models/          # Classes de domínio (Livro, Usuario, etc.)
+│   │   │       ├── daos/            # Acesso aos dados
+│   │   │       └── App.java         # Menu principal
+│   │   └── resources/
+│   │       └── application.properties
+├── pom.xml
+└── README.md ← este arquivo
+
+---
+
+### Sobre o Projeto
+
+> Este sistema foi desenvolvido como parte de um projeto acadêmico, com o objetivo de praticar conceitos como:
+
+- Programação orientada a objetos (POO)
+
+- Estrutura em camadas (Model, DAO, Controller)
+
+- Integração com banco de dados relacional
+
+- Uso de frameworks Java no backend
+- 
+---
+
+## Como Rodar o Projeto
+
+1. Clone o projeto:
+
+```bash
+git clone https://github.com/anafariass/sistema-biblioteca.git
+cd sistema-biblioteca
+
+
+2. Configure o banco de dados em application.properties:
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/biblioteca
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+
+3. Rode o projeto:
+
+mvn spring-boot:run
