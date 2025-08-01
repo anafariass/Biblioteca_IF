@@ -65,7 +65,7 @@ biblioteca/
 
 1. Clone o projeto:
 
-```bash
+
 git clone https://github.com/anafariass/sistema-biblioteca.git
 cd sistema-biblioteca
 
